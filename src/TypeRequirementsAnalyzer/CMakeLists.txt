@@ -1,4 +1,4 @@
-add_executable(type_requirements_analyzer
+add_executable(type_requirements_analyzer EXCLUDE_FROM_ALL
     type_requirements_analyzer.cpp
     )
 

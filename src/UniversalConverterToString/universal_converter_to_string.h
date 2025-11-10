@@ -3,17 +3,20 @@
 
 #include "string_conversion_traits.h"
 
-#include <optional>
 #include <sstream>
+#include <exception>
 
 namespace dev_toolkit {
 
+class InvalidTypeConversionException : public std::exception {
+public:
+    const char* what() const noexcept override;
+};
+
 //TODO: прописать описание для этого чуда
 //TODO: еще нужно сделать перегрузку с std::function для предоставления своего варианта развития событий
-//TODO: Видимо следует это реализовывать через выкидывание исключения, если тип не может быть конвертирован, что более логично
-//TODO: И сделать кастомный тип для исключения
 template <typename T>
-std::optional<std::string> universal_converter_to_string(T&& value) {
+std::string universal_converter_to_string(T&& value) {
     if constexpr (std::is_same_v<std::remove_reference_t<T>, std::string>) { return value; }
 
     if constexpr (std::is_same_v<std::remove_reference_t<T>, char> || 
@@ -25,7 +28,7 @@ std::optional<std::string> universal_converter_to_string(T&& value) {
     }
 
     if constexpr (string_conversion_traits::is_to_string_compatible_v<T>) {
-        return std::to_string(value); 
+        return std::to_string(std::forward<T>(value)); 
     }
     if constexpr (std::is_constructible_v<std::string, T>) { 
         return std::string(std::forward<T>(value)); 
@@ -35,8 +38,20 @@ std::optional<std::string> universal_converter_to_string(T&& value) {
         oss << (std::forward<T>(value));
         return oss.str();
     } 
-    return std::nullopt;
+
+    throw InvalidTypeConversionException();  // The type is not supported for conversion
+    return "";
 }
+
+namespace details {
+    
+//TODO: тоже прописать зачем нужен этот КОСТЫЛЬ
+template <typename T>
+std::string const_universal_converter_to_string(const T& value) {
+    return universal_converter_to_string(value);
+}
+
+} // details namespace
 
 } // dev_toolkit namespace
 

@@ -5,7 +5,6 @@ target_include_directories(string_conversation_traits
     ${CMAKE_CURRENT_LIST_DIR}
   )
 
-
 # # We use this to get code coverage
 # # Flags are only valid with the GNU compiler and on Linux
 # if(CMAKE_CXX_COMPILER_ID MATCHES GNU AND CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")

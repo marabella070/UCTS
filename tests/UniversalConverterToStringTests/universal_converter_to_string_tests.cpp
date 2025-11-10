@@ -10,9 +10,17 @@
 
 template <typename T>
 bool test_conversion(T&& initial_value, const std::string& expected_value) {
-    auto result = dev_toolkit::universal_converter_to_string(std::forward<T>(initial_value));
-    if (!result.has_value()) { return false; }
-    return result.value() == expected_value;
+    
+    std::string result;
+
+    try {
+        result = dev_toolkit::universal_converter_to_string(std::forward<T>(initial_value));
+
+    } catch (const dev_toolkit::InvalidTypeConversionException& e) {
+        std::cout << e.what() << std::endl;
+        return false;
+    }
+    return result == expected_value;
 }
 
 TEST(UniversalConverterTest, DegenerateCase) {

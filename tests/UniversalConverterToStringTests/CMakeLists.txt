@@ -1,18 +1,18 @@
 add_executable(
     universal_converter_to_string_tests
     is_convertible_to_string_tests.cpp
-    universal_converter_to_string.cpp
+    universal_converter_to_string_tests.cpp
     )
+
+target_include_directories(universal_converter_to_string_tests
+  PRIVATE
+    ${GTEST_INCLUDE_DIRS}
+  )
 
 target_link_libraries(universal_converter_to_string_tests
   PRIVATE
     universal_converter_to_string
     gtest_main
-  )
-
-target_include_directories(universal_converter_to_string_tests
-  PRIVATE
-    ${GTEST_INCLUDE_DIRS}
   )
 
 # automatic discovery of "universal_converter_to_string" tests
