@@ -1,8 +1,5 @@
-add_subdirectory(StringConversionTraits)
+add_subdirectory(UniversalConverterToString)
 
 add_subdirectory(TypeRequirementsAnalyzer)
 
-add_subdirectory(UniversalConverterToString)
-
-add_subdirectory(DemoProgram)
-
+add_subdirectory(InstantTests)

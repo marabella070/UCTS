@@ -2,3 +2,7 @@
 build/
 .~lock.PossibilitiesGrid.ods#
 PossibilitiesGrid.ods
+.clang-format
+.clang-tidy
+format.sh
+coverage.sh

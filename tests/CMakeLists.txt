@@ -16,7 +16,6 @@ FetchContent_MakeAvailable(gtest)
 # This module provides commands to help use the Google Test infrastructure.
 include(GoogleTest)
 
-add_subdirectory(StringConversionTraitsTests)
+add_subdirectory(UniversalConverterToStringTraitsTests)
 
 add_subdirectory(UniversalConverterToStringTests)
-
