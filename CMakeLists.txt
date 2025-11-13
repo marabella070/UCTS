@@ -49,7 +49,7 @@ else()
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${allowableBuildTypes})
 
   if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE DebugWithWarnings CACHE STRING "" FORCE)  # DebugWithWarnings by default
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)  # DebugWithWarnings by default
   elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
     message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE}")
   endif()
